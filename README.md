@@ -1,6 +1,6 @@
 # PelSoftLabs_Assignment
 
-# Please provide the initial records using this query
+# Provide the initial records using this query
 
 INSERT INTO tbl_Product ( ProductName, Size, Price, MfgDate, Category)
 VALUES
