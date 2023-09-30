@@ -31,8 +31,8 @@ namespace PelSoftLabsTest.Migrations
                     b.Property<DateTime>("MfgDate")
                         .HasColumnType("Date");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<double>("Price")
+                        .HasColumnType("double");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
