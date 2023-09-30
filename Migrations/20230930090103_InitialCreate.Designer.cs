@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PelSoftLabsTest.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20230930085442_InitialCreate")]
+    [Migration("20230930090103_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -34,8 +34,8 @@ namespace PelSoftLabsTest.Migrations
                     b.Property<DateTime>("MfgDate")
                         .HasColumnType("Date");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("double");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
