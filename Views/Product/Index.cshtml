@@ -1,0 +1,92 @@
+﻿@model PelSoftLabsTest.Models.SearchProductCriteria;
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div class="container mt-4">
+    @using (Html.BeginForm("Search", "Product", FormMethod.Post, new { @class = "form", id = "searchForm" }))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ProductName)
+                    @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Size)
+                    @Html.TextBoxFor(m => m.Size, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Price)
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MfgDate)
+                    @Html.TextBoxFor(m => m.MfgDate, new { type = "date", @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Category)
+                    @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.Label("Condition")
+                    @Html.DropDownListFor(m => m.Conjunction, new SelectList(new[] { "AND", "OR" }), new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <button type="button" class="btn btn-primary" onclick="search()">Search</button>
+            <button type="button" class="btn btn-secondary ml-2" onclick="clearSearch()">Clear</button>
+        </div>
+    }
+
+    <div id="searchResults" class="mt-4">
+        @Html.Partial("_SearchResults", new SearchResultsView())
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    function search() {
+        var formData = $('#searchForm').serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: '/Product/Search',
+            data: formData,
+            success: function (result) {
+                $('#searchResults').html(result);
+            },
+            error: function () {
+                alert('Error occurred while processing the request.');
+            }
+        });
+    }
+
+    function clearSearch() {
+        $('#ProductName, #Size, #Price, #MfgDate, #Category').val('');
+        $('#Conjunction').prop('selectedIndex', 0);
+    }
+</script>

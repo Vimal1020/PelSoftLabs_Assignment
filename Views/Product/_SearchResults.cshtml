@@ -1,0 +1,39 @@
+﻿@model PelSoftLabsTest.Models.SearchResultsView
+
+<div>
+    <h3>Search Results:</h3>
+    @if (Model != null && Model.SearchResults != null && Model.SearchResults.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center" style="border: 1px solid #dee2e6;">Product ID</th>
+                        <th class="text-center" style="border: 1px solid #dee2e6;">Product Name</th>
+                        <th class="text-center" style="border: 1px solid #dee2e6;">Price</th>
+                        <th class="text-center" style="border: 1px solid #dee2e6;">Size</th>
+                        <th class="text-center" style="border: 1px solid #dee2e6;">Mfg Date</th>
+                        <th class="text-center" style="border: 1px solid #dee2e6;">Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.SearchResults)
+                    {
+                        <tr>
+                            <td class="text-center" style="border: 1px solid #dee2e6;">@product.ProductId</td>
+                            <td class="text-center" style="border: 1px solid #dee2e6;">@product.ProductName</td>
+                            <td class="text-center" style="border: 1px solid #dee2e6;">@product.Price.ToString("C")</td>
+                            <td class="text-center" style="border: 1px solid #dee2e6;">@product.Size</td>
+                            <td class="text-center" style="border: 1px solid #dee2e6;">@product.MfgDate.ToString("yyyy-MM-dd")</td>
+                            <td class="text-center" style="border: 1px solid #dee2e6;">@product.Category</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p>No search results found.</p>
+    }
+</div>
